@@ -1,0 +1,7 @@
+# Copy to local.properties (never commit it).
+sdk.dir=/path/to/Android/sdk
+# Developer Mode in the Meta AI app: both may be 0. Production: values from Wearables Developer Center.
+mwdat_application_id=0
+mwdat_client_token=0
+# NAZAR API (Cloudflare Worker) base URL, e.g. https://nazar-api.<account>.workers.dev
+nazar_api_url=
