@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --midnight: #07111c;
+  --ivory: #f7f1e7;
+  --sand: #d9b98d;
+  --gold: #d6a96b;
+  --teal: #35d6c3;
+  color-scheme: dark;
+}
+
+html, body, #root { height: 100%; }
+body { background: var(--midnight); color: var(--ivory); font-family: 'Inter Variable', 'IBM Plex Sans Arabic', system-ui, sans-serif; }
+[dir='rtl'] body, [lang='ar'] { font-family: 'IBM Plex Sans Arabic', 'Inter Variable', system-ui, sans-serif; }
+.font-display { font-family: 'Cormorant Garamond', 'Amiri', serif; }
+[dir='rtl'] .font-display, .ar-display { font-family: 'Amiri', 'Cormorant Garamond', serif; }
+
+:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; border-radius: 6px; }
+
+.glass {
+  background: linear-gradient(180deg, rgba(16, 34, 51, 0.78), rgba(7, 17, 28, 0.82));
+  border: 1px solid rgba(217, 185, 141, 0.16);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+.hairline { border-color: rgba(217, 185, 141, 0.16); }
+.text-muted { color: rgba(247, 241, 231, 0.66); }
+.grain::after {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none; opacity: 0.06; mix-blend-mode: overlay;
+  background-image: radial-gradient(rgba(255,255,255,0.6) 1px, transparent 1px);
+  background-size: 3px 3px;
+}
+.skip-link { position: absolute; left: -9999px; top: 8px; }
+.skip-link:focus { left: 8px; z-index: 100; background: var(--ivory); color: var(--midnight); padding: 8px 12px; border-radius: 8px; }
+
+@keyframes pulse-ring { 0% { transform: scale(0.9); opacity: 0.8; } 100% { transform: scale(1.6); opacity: 0; } }
+.pulse-ring { animation: pulse-ring 1.6s ease-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+
+/* Thin scrollbars inside panels */
+.scroll-thin { scrollbar-width: thin; scrollbar-color: rgba(217,185,141,0.3) transparent; }

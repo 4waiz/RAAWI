@@ -1,0 +1,11 @@
+{
+  "name": "NAZAR — The Living Memory of the UAE",
+  "short_name": "NAZAR",
+  "description": "See the place. Hear its story. A bilingual heritage companion by Team Kanban.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#07111C",
+  "theme_color": "#07111C",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+}
