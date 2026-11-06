@@ -1,0 +1,70 @@
+name: CI & GitHub Pages
+
+on:
+  push:
+    branches: [main, master, 'claude/**']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.28.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm typecheck
+      - run: pnpm lint
+      - run: pnpm test
+      - name: Build (GitHub Pages base path)
+        run: pnpm build
+        env:
+          BASE_PATH: /${{ github.event.repository.name }}/
+      - name: Secret leakage check on the built site
+        run: node scripts/check-secrets.mjs apps/web/dist
+      - name: Build for E2E (root base path)
+        run: pnpm --filter @nazar/web exec vite build --outDir dist-e2e
+      - name: Install Playwright Chromium
+        run: pnpm --filter @nazar/web exec playwright install --with-deps chromium
+      - name: End-to-end, accessibility and mobile tests
+        run: |
+          rm -rf apps/web/dist-pages && mv apps/web/dist apps/web/dist-pages && mv apps/web/dist-e2e apps/web/dist
+          pnpm --filter @nazar/web exec playwright test
+          rm -rf apps/web/dist && mv apps/web/dist-pages apps/web/dist
+        env:
+          CI: true
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: apps/web/dist
+
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: ci
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Configure Pages (enables Pages with the GitHub Actions source if allowed)
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+        continue-on-error: true
+      - id: deployment
+        uses: actions/deploy-pages@v4
