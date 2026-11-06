@@ -1,0 +1,19 @@
+{
+  "name": "nazar",
+  "private": true,
+  "version": "0.1.0",
+  "description": "NAZAR — The Living Memory of the UAE. Team Kanban, Meta Wearables Studio UAE 2026.",
+  "scripts": {
+    "dev": "pnpm --filter @nazar/web dev",
+    "build": "pnpm --filter @nazar/web build",
+    "typecheck": "pnpm -r typecheck",
+    "lint": "pnpm -r lint",
+    "test": "pnpm -r test",
+    "e2e": "pnpm --filter @nazar/web e2e",
+    "check:secrets": "node scripts/check-secrets.mjs .",
+    "check:links": "node --experimental-strip-types scripts/check-links.mjs",
+    "build:pages": "BASE_PATH=/RAAWI/ pnpm build",
+    "dev:api": "pnpm --filter @nazar/worker dev"
+  },
+  "packageManager": "pnpm@10.28.0"
+}

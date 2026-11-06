@@ -1,0 +1,15 @@
+node_modules
+dist
+.env
+.env.*
+!.env.example
+.dev.vars
+.wrangler
+coverage
+test-results
+playwright-report
+*.log
+.DS_Store
+android/**/build
+android/.gradle
+android/local.properties
