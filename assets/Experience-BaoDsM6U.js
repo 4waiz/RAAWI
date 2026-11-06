@@ -1,0 +1,1 @@
+import{r,j as t}from"./r3f-BiEt9UjD.js";import{u as o}from"./index-BeSxJ2Hm.js";import{E as s}from"./ExperienceShell-BMPjqR3M.js";import"./three-TVHKp81e.js";function n(){return r.useEffect(()=>{document.title="Experience — NAZAR";const e=o.getState();e.overview&&!e.focusEntryId&&e.focus("barjeel-al-fahidi")},[]),t.jsx(s,{})}export{n as default};

@@ -1,0 +1,1 @@
+import{r as e,j as r}from"./r3f-BiEt9UjD.js";import{r as t,E as o}from"./ExperienceShell-BMPjqR3M.js";import"./three-TVHKp81e.js";import"./index-BeSxJ2Hm.js";function n(){return e.useEffect(()=>{document.title="Presenter — NAZAR",t()},[]),r.jsx(o,{presenter:!0})}export{n as default};
